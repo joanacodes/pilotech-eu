@@ -31,11 +31,11 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
 
 ## À savoir
 
-- Le visuel ELFO du hero est chargé depuis le CDN Squarespace du site Teknopoint actuel. Pour ne plus dépendre
-  de Squarespace, enregistrer ce PNG dans `assets/img/` et changer le `src` de `.hero-product img`.
-  Si l'image ne charge pas, le hero reste propre : le bloc produit est simplement masqué.
+- Le visuel IDRA Next Ring du hero est chargé depuis le CDN Squarespace du site Teknopoint actuel
+  (même adresse que dans le dépôt pilotech). Pour ne plus dépendre de Squarespace, enregistrer ce PNG dans `assets/img/`
+  et changer le `src` de `.hero-product img`. Si l'image ne charge pas, le bloc produit est simplement masqué.
 - L'URL canonique est `https://www.pilotech.eu/`. Tant que pilotech.eu héberge le site Teknopoint (Squarespace),
   le lien « Climatisation invisible » y renvoie. Le jour où ce portail prendra le domaine pilotech.eu,
   il faudra donner une nouvelle adresse au site Teknopoint et mettre ce lien à jour.
-- Les photos d'intérieur viennent des sites Toshiba et VMI ; les appareils visibles ont été retirés pour poser par-dessus
+- La photo du hero (séjour avec IDRA dans l'îlot) a été fournie par Pilotech. Les photos des cartes viennent des sites Toshiba et VMI ; les appareils visibles ont été retirés pour poser par-dessus
   les visuels produits détourés.
