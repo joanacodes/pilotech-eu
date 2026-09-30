@@ -419,6 +419,75 @@
         </div>
       </div>
     </section>
+
+    <!-- ================= Formulaire de devis ================= -->
+    <section class="quote" id="devis" aria-labelledby="devis-title">
+      <div class="container quote-inner">
+        <div class="quote-copy" data-reveal>
+          <p class="kicker">Devis gratuit</p>
+          <h2 id="devis-title">Parlons de <span class="grad-text">votre projet.</span></h2>
+          <p>Décrivez-nous votre logement ou vos locaux : nous vous rappelons sous 24 heures ouvrées pour organiser une visite technique gratuite, puis un devis ferme.</p>
+          <ul class="quote-contact">
+            <li><a href="tel:+33185441253"><span class="qc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span><span><strong>01 85 44 12 53</strong><small>Lundi – vendredi, 9 h – 18 h</small></span></a></li>
+            <li><a href="mailto:info.pilotech@gmail.com"><span class="qc-icon is-line" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span><span><strong>info.pilotech@gmail.com</strong><small>Réponse sous 24 h ouvrées</small></span></a></li>
+          </ul>
+        </div>
+
+        <div class="quote-card" data-reveal data-quote>
+          <form class="quote-form" action="https://formsubmit.co/info.pilotech@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Demande de devis : portail pilotech.eu">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.pilotech.eu/merci.html" data-next-path="merci.html">
+            <input type="hidden" name="_autoresponse" value="Merci pour votre demande. L'équipe Pilotech vous recontacte sous 24 heures ouvrées.">
+            <input type="hidden" name="page" value="Portail pilotech.eu : formulaire de devis">
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div class="quote-grid">
+              <label class="field">
+                <span>Nom et prénom</span>
+                <input name="nom" type="text" required autocomplete="name" placeholder="Camille Martin">
+              </label>
+              <label class="field">
+                <span>Téléphone</span>
+                <input name="telephone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78">
+              </label>
+              <label class="field">
+                <span>Adresse e-mail</span>
+                <input name="email" type="email" required autocomplete="email" inputmode="email" placeholder="camille@exemple.fr">
+              </label>
+              <label class="field">
+                <span>Ville</span>
+                <input name="ville" type="text" required autocomplete="address-level2" placeholder="Paris, Boulogne, Versailles…">
+              </label>
+            </div>
+            <label class="field">
+              <span>Solution envisagée</span>
+              <select name="solution" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Climatisation invisible Teknopoint (sans unité extérieure)</option>
+                <option>Climatisation ou pompe à chaleur Toshiba</option>
+                <option>Ventilation par insufflation VMI</option>
+                <option>Je ne sais pas encore, j'ai besoin de conseils</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Votre projet</span>
+              <textarea name="message" rows="4" required placeholder="Surface, nombre de pièces, type de logement, contraintes de copropriété, délais souhaités…"></textarea>
+            </label>
+            <label class="consent">
+              <input type="checkbox" name="consentement" value="oui" required>
+              <span>J'accepte que ces informations servent à traiter ma demande. Elles ne sont jamais transmises à des tiers.</span>
+            </label>
+            <p class="form-error" data-form-error hidden>Merci de remplir tous les champs, avec une adresse e-mail valide, et de cocher la case.</p>
+            <button type="submit" class="btn btn-tekno quote-submit">
+              <span data-submit-label>Envoyer ma demande</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Pied de page -->

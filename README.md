@@ -37,6 +37,8 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
   (attribut `action` du formulaire `#contact`). Si l'envoi direct échoue, le formulaire est envoyé classiquement
   et FormSubmit redirige vers `merci.html`. Au tout premier envoi depuis un nouveau domaine, FormSubmit peut
   demander de confirmer l'adresse par e-mail (lien « Activate form » à cliquer une fois).
+- **Formulaire de devis** (section `#devis`, sous les avis) : nom, téléphone, e-mail, ville, solution envisagée,
+  message et consentement, envoyé par FormSubmit à la même adresse, objet « Demande de devis : portail pilotech.eu ».
 - **Avis Google** : note moyenne (5,0 sur 82 avis) dans le hero, le bandeau et la section « Avis clients ».
   Pour mettre à jour la note ou le nombre d'avis, rechercher « 82 avis » et « 5,0 » dans `index.html`.
   Les 12 avis du carrousel sont des citations réelles reprises de `_data/reviews.yml` (dépôt pilotech).

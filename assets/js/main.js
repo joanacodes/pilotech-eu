@@ -145,18 +145,23 @@
     var stopped = reduce, hovering = false, visible = false, timer = null;
     if (bar) bar.style.setProperty("--slide-ms", DELAY + "ms");
 
-    function step() {
-      var card = track.querySelector(".review");
-      if (!card) return 0;
-      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-      return card.getBoundingClientRect().width + gap;
+    var cards = Array.prototype.slice.call(track.querySelectorAll(".review"));
+    /* Position exacte de chaque carte : pas de conflit avec l'aimantation (scroll-snap) sur Safari */
+    function offsetOf(card) { return card.offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0); }
+    function currentIndex() {
+      var x = track.scrollLeft, best = 0, bestD = Infinity;
+      cards.forEach(function (c, k) { var d = Math.abs(offsetOf(c) - x); if (d < bestD) { bestD = d; best = k; } });
+      return best;
     }
     function go(dir) {
-      var max = track.scrollWidth - track.clientWidth - 4;
-      var behavior = reduce ? "auto" : "smooth";
-      if (dir > 0 && track.scrollLeft >= max) track.scrollTo({ left: 0, behavior: behavior });
-      else if (dir < 0 && track.scrollLeft <= 4) track.scrollTo({ left: track.scrollWidth, behavior: behavior });
-      else track.scrollBy({ left: dir * step(), behavior: behavior });
+      if (!cards.length) return;
+      var max = track.scrollWidth - track.clientWidth;
+      var i = currentIndex() + dir;
+      var left;
+      if (dir > 0 && (i >= cards.length || track.scrollLeft >= max - 4)) left = 0;
+      else if (i < 0) left = max;
+      else left = Math.min(offsetOf(cards[i]), max);
+      track.scrollTo({ left: left, behavior: reduce ? "auto" : "smooth" });
     }
     function running() { return !stopped && !hovering && visible && !document.hidden; }
     function restartBar() {
@@ -199,6 +204,70 @@
     setStopped(stopped);
   }
 
+
+  /* ---------- Formulaires FormSubmit (fenêtre e-mail et formulaire de devis) ---------- */
+  function doneHTML(title, extra) {
+    return '<div class="contact-done" role="status">' +
+      '<span class="done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+      '<h2>' + title + '</h2>' +
+      '<p>Merci ! L\u2019équipe Pilotech vous répond sous 24 heures ouvrées.</p>' + (extra || "") + '</div>';
+  }
+  function wireForm(form, onSuccess) {
+    if (!form) return;
+    var error = form.querySelector("[data-form-error]");
+    var errorText = error ? error.textContent : "";
+    var next = form.querySelector('input[name="_next"]');
+    if (next && /^https?:/.test(window.location.origin)) next.value = new URL(next.getAttribute("data-next-path"), window.location.href).href;
+
+    form.addEventListener("input", function (e) {
+      e.target.classList.remove("is-invalid");
+      if (form.checkValidity() && error) error.hidden = true;
+    });
+    form.addEventListener("change", function (e) { e.target.classList.remove("is-invalid"); });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var firstBad = null;
+      form.querySelectorAll("[required]").forEach(function (f) {
+        if ((f.tagName === "INPUT" && f.type !== "checkbox") || f.tagName === "TEXTAREA") { if (f.value.trim() === "") f.value = ""; }
+        var bad = !f.checkValidity();
+        f.classList.toggle("is-invalid", bad);
+        if (bad && !firstBad) firstBad = f;
+      });
+      if (firstBad) {
+        if (error) { error.textContent = errorText; error.hidden = false; }
+        firstBad.focus(); return;
+      }
+      if (!window.fetch || !window.FormData) { form.submit(); return; }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var label = form.querySelector("[data-submit-label]");
+      var labelText = label.textContent;
+      btn.disabled = true; label.textContent = "Envoi en cours…";
+      window.fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+        method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
+      })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (data) {
+          if (data && (data.success === false || data.success === "false")) throw new Error(data.message || "refus");
+          onSuccess();
+        })
+        .catch(function () {
+          /* Repli : envoi classique, FormSubmit redirige ensuite vers merci.html */
+          btn.disabled = false; label.textContent = labelText;
+          form.submit();
+        });
+    });
+  }
+
+  function initQuote() {
+    var box = document.querySelector("[data-quote]");
+    if (!box) return;
+    wireForm(box.querySelector("form"), function () {
+      box.innerHTML = doneHTML("Demande envoyée");
+      box.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+    });
+  }
+
   /* ---------- Fenêtre « Nous écrire » (FormSubmit) ---------- */
   function initContact() {
     var dialog = document.getElementById("contact");
@@ -224,54 +293,10 @@
     dialog.addEventListener("close", onClose);
 
     function bindForm() {
-      var form = dialog.querySelector("[data-contact-form]");
-      var error = form.querySelector("[data-form-error]");
-      var next = form.querySelector('input[name="_next"]');
-      if (next && /^https?:/.test(window.location.origin)) next.value = new URL(next.getAttribute("data-next-path"), window.location.href).href;
-
-      form.addEventListener("input", function (e) {
-        e.target.classList.remove("is-invalid");
-        if (form.checkValidity()) error.hidden = true;
-      });
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var fields = form.querySelectorAll("input[required], textarea[required]");
-        var firstBad = null;
-        fields.forEach(function (f) {
-          f.value = f.value.trim() === "" ? "" : f.value;
-          var bad = !f.checkValidity();
-          f.classList.toggle("is-invalid", bad);
-          if (bad && !firstBad) firstBad = f;
-        });
-        if (firstBad) {
-          error.textContent = "Merci de remplir les trois champs, avec une adresse e-mail valide.";
-          error.hidden = false; firstBad.focus(); return;
-        }
-        if (!window.fetch || !window.FormData) { form.submit(); return; }
-
-        var btn = form.querySelector('button[type="submit"]');
-        var label = form.querySelector("[data-submit-label]");
-        btn.disabled = true; label.textContent = "Envoi en cours…";
-        window.fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
-          method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
-        })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-          .then(function (data) {
-            if (data && (data.success === false || data.success === "false")) throw new Error(data.message || "refus");
-            sent = true;
-            body.innerHTML =
-              '<div class="contact-done" role="status">' +
-              '<span class="done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
-              '<h2>Message envoyé</h2>' +
-              '<p>Merci ! L’équipe Pilotech vous répond sous 24 heures ouvrées.</p>' +
-              '<button type="button" class="btn btn-tekno contact-submit" data-close-contact style="margin-top:1.6rem"><span>Fermer</span></button>' +
-              '</div>';
-          })
-          .catch(function () {
-            /* Repli : envoi classique, FormSubmit redirige ensuite vers merci.html */
-            btn.disabled = false; label.textContent = "Envoyer";
-            form.submit();
-          });
+      wireForm(dialog.querySelector("[data-contact-form]"), function () {
+        sent = true;
+        body.innerHTML = doneHTML("Message envoyé",
+          '<button type="button" class="btn btn-tekno contact-submit" data-close-contact style="margin-top:1.6rem"><span>Fermer</span></button>');
       });
     }
     bindForm();
@@ -280,7 +305,7 @@
   function init() {
     var y = document.querySelector("[data-year]");
     if (y) y.textContent = new Date().getFullYear();
-    initPreloader(); initHeader(); initReveal(); initParallax(); initTilt(); initSlider(); initContact();
+    initPreloader(); initHeader(); initReveal(); initParallax(); initTilt(); initSlider(); initContact(); initQuote();
   }
   if (document.readyState !== "loading") init(); else document.addEventListener("DOMContentLoaded", init);
 })();
