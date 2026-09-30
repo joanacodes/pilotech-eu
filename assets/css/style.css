@@ -126,6 +126,15 @@ html.no-preloader .preloader, html:not(.js) .preloader { display: none; }
 
 .hero-inner { display: grid; gap: 3.5rem; align-items: center; }
 @media (min-width: 1024px) { .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 3.5rem; } }
+/* Mobile et tablette : la photo se place juste sous le titre */
+@media (max-width: 1023px) {
+  .hero-inner { gap: 0; }
+  .hero-copy { display: contents; }
+  .hero-copy > .eyebrow { order: 1; justify-self: start; }
+  .hero-copy > .hero-title { order: 2; }
+  .hero-visual { order: 3; margin-top: 1.4rem; }
+  .hero-copy > .hero-lead, .hero-copy > .hero-facts, .hero-copy > .hero-cta { order: 4; }
+}
 
 .eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tekno-300); padding: .45rem .9rem .45rem .75rem; border: 1px solid rgba(111, 195, 255, .28); border-radius: 999px; background: rgba(4, 135, 241, .1); }
 .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--tekno-500); box-shadow: 0 0 0 0 rgba(4, 135, 241, .7); animation: pulse 2.4s ease-out infinite; }
