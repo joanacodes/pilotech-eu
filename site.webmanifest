@@ -1,0 +1,14 @@
+{
+  "name": "Pilotech Climatisation",
+  "short_name": "Pilotech",
+  "description": "Climatisation invisible Teknopoint, climatisation Toshiba et ventilation VMI en Île-de-France.",
+  "lang": "fr-FR",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#071B3D",
+  "theme_color": "#071B3D",
+  "icons": [
+    { "src": "assets/img/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
