@@ -120,6 +120,7 @@ html.no-preloader .preloader, html:not(.js) .preloader { display: none; }
    ========================================================================== */
 .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 7rem 0 4.5rem;
   background: linear-gradient(155deg, var(--tekno-950) 0%, var(--tekno-900) 35%, var(--tekno-800) 70%, var(--tekno-700) 100%); }
+.hero[data-hero-href] { cursor: pointer; }
 .hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; will-change: transform; }
 .orb-1 { width: 46%; aspect-ratio: 1; left: -12%; top: -20%; background: radial-gradient(circle, #0487F1, transparent 65%); animation: drift 18s ease-in-out infinite; }

@@ -4,7 +4,7 @@ Page d'entrée unique vers les trois sites Pilotech :
 
 | Solution | Où se trouve-t-elle sur la page | Lien |
 |---|---|---|
-| Climatisation invisible Teknopoint | Hero (plein écran) | https://www.pilotech.eu/ |
+| Climatisation invisible Teknopoint | Hero (plein écran, toute la section est cliquable) | https://pilotechclimatisation.com/ |
 | Climatisation et pompes à chaleur Toshiba | Carte de gauche | https://pilotech-toshiba.com/ |
 | Ventilation par insufflation VMI | Carte de droite | https://pilotech-vmi.fr/ |
 
@@ -25,7 +25,7 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
 ## Modifier
 
 - **Couleurs** : variables `--tekno-*` (bleu principal), `--toshiba-*` et `--vmi-*` au début de `assets/css/style.css`.
-- **Liens vers les sites** : rechercher `pilotech.eu`, `pilotech-toshiba.com` et `pilotech-vmi.fr` dans `index.html`
+- **Liens vers les sites** : rechercher `pilotechclimatisation.com`, `pilotech-toshiba.com` et `pilotech-vmi.fr` dans `index.html`
   (en-tête, hero, cartes, pied de page et JSON-LD).
 - **Préchargeur** : il s'affiche une fois par session (clé `pilotech-portail` dans sessionStorage).
   Il ne s'affiche pas si l'utilisateur a demandé à réduire les animations.
@@ -50,8 +50,7 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
 - Le visuel IDRA Next Ring du hero est chargé depuis le CDN Squarespace du site Teknopoint actuel
   (même adresse que dans le dépôt pilotech). Pour ne plus dépendre de Squarespace, enregistrer ce PNG dans `assets/img/`
   et changer le `src` de `.hero-product img`. Si l'image ne charge pas, le bloc produit est simplement masqué.
-- L'URL canonique est `https://www.pilotech.eu/`. Tant que pilotech.eu héberge le site Teknopoint (Squarespace),
-  le lien « Climatisation invisible » y renvoie. Le jour où ce portail prendra le domaine pilotech.eu,
-  il faudra donner une nouvelle adresse au site Teknopoint et mettre ce lien à jour.
+- L'URL canonique du portail est `https://www.pilotech.eu/`. Le site Teknopoint est à `https://pilotechclimatisation.com/` :
+  le hero entier (attribut `data-hero-href`), son bouton, le menu et le pied de page y renvoient.
 - La photo du hero (séjour avec IDRA dans l'îlot) a été fournie par Pilotech. Les photos des cartes viennent des sites Toshiba et VMI ; les appareils visibles ont été retirés pour poser par-dessus
   les visuels produits détourés.

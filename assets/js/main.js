@@ -302,10 +302,23 @@
     bindForm();
   }
 
+  // Tout le hero mène au site Teknopoint ; les liens et boutons qu'il contient gardent leur propre cible.
+  function initHeroLink() {
+    var hero = document.querySelector("[data-hero-href]");
+    if (!hero) return;
+    var href = hero.getAttribute("data-hero-href");
+    hero.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.target.closest("a, button, input, select, textarea, label")) return;
+      if (String(window.getSelection ? window.getSelection() : "").length) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey) window.open(href, "_blank", "noopener");
+      else window.location.href = href;
+    });
+  }
+
   function init() {
     var y = document.querySelector("[data-year]");
     if (y) y.textContent = new Date().getFullYear();
-    initPreloader(); initHeader(); initReveal(); initParallax(); initTilt(); initSlider(); initContact(); initQuote();
+    initPreloader(); initHeader(); initReveal(); initParallax(); initTilt(); initSlider(); initContact(); initQuote(); initHeroLink();
   }
   if (document.readyState !== "loading") init(); else document.addEventListener("DOMContentLoaded", init);
 })();
