@@ -25,6 +25,7 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
 ## Modifier
 
 - **Couleurs** : variables `--tekno-*` (bleu principal), `--toshiba-*` et `--vmi-*` au début de `assets/css/style.css`.
+- **Cache** : après une modification de `style.css` ou `main.js`, changer le `?v=` de leur lien dans `index.html` (et `merci.html` pour le CSS) pour que les navigateurs chargent la nouvelle version.
 - **Liens vers les sites** : rechercher `pilotechclimatisation.com`, `pilotech-toshiba.com` et `pilotech-vmi.fr` dans `index.html`
   (en-tête, hero, cartes, pied de page et JSON-LD).
 - **Préchargeur** : il s'affiche une fois par session (clé `pilotech-portail` dans sessionStorage).
