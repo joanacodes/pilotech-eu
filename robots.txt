@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.pilotech.eu/sitemap.xml
+Sitemap: https://pilotech.eu/sitemap.xml

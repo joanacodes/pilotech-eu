@@ -50,7 +50,7 @@ robots.txt, sitemap.xml, site.webmanifest, favicon.ico, apple-touch-icon.png
 - Le visuel IDRA Next Ring du hero est chargé depuis le CDN Squarespace du site Teknopoint actuel
   (même adresse que dans le dépôt pilotech). Pour ne plus dépendre de Squarespace, enregistrer ce PNG dans `assets/img/`
   et changer le `src` de `.hero-product img`. Si l'image ne charge pas, le bloc produit est simplement masqué.
-- L'URL canonique du portail est `https://www.pilotech.eu/`. Le site Teknopoint est à `https://pilotechclimatisation.com/` :
+- L'URL canonique du portail est (sans www, comme le fichier CNAME) `https://pilotech.eu/`. Le site Teknopoint est à `https://pilotechclimatisation.com/` :
   le hero entier (attribut `data-hero-href`), son bouton, le menu et le pied de page y renvoient.
 - La photo du hero (séjour avec IDRA dans l'îlot) a été fournie par Pilotech. Les photos des cartes viennent des sites Toshiba et VMI ; les appareils visibles ont été retirés pour poser par-dessus
   les visuels produits détourés.

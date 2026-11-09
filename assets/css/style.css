@@ -261,7 +261,7 @@ html.no-preloader .preloader, html:not(.js) .preloader { display: none; }
 .card-tekno .brand-tag > span:last-child { color: #55607a; }
 .card-tekno .card-link { color: #fff; background: var(--tekno-900); box-shadow: 0 12px 26px -14px rgba(4, 15, 38, .6); }
 .card-tekno:hover .card-link { background: var(--tekno-500); box-shadow: 0 16px 30px -12px rgba(4, 135, 241, .55); }
-.card-tekno .card-product { width: 46%; right: 2%; bottom: -14%; }
+.card-tekno .card-product { width: 26%; right: 5%; bottom: -14%; }
 .card-tekno:hover .card-product { transform: translate3d(-5px, -10px, 0) rotate(-1deg); }
 
 .card-toshiba { --accent: var(--toshiba-red); color: #3a3a3a; }
@@ -289,7 +289,7 @@ html.no-preloader .preloader, html:not(.js) .preloader { display: none; }
 
 @media (max-width: 560px) {
   .card-body { padding: 2rem 1.4rem 1.6rem; }
-  .card-tekno .card-product { width: 50%; bottom: -12%; }
+  .card-tekno .card-product { width: 30%; bottom: -12%; }
   .card-toshiba .card-product { width: 62%; bottom: -12%; }
   .card-vmi .card-product { width: 38%; bottom: -14%; }
 }
