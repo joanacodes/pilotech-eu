@@ -4,9 +4,9 @@ Page d'entrée unique vers les trois sites Pilotech :
 
 | Solution | Où se trouve-t-elle sur la page | Lien |
 |---|---|---|
-| Climatisation invisible Teknopoint | Hero (plein écran, toute la section est cliquable) | https://pilotechclimatisation.com/ |
-| Climatisation et pompes à chaleur Toshiba | Carte de gauche | https://pilotech-toshiba.com/ |
-| Ventilation par insufflation VMI | Carte de droite | https://pilotech-vmi.fr/ |
+| Climatisation invisible Teknopoint | Hero (plein écran, toute la section est cliquable) et première carte | https://pilotechclimatisation.com/ |
+| Climatisation et pompes à chaleur Toshiba | Deuxième carte | https://pilotech-toshiba.com/ |
+| Ventilation par insufflation VMI | Troisième carte | https://pilotech-vmi.fr/ |
 
 Le site est entièrement statique : HTML, CSS et JS, sans étape de build ni dépendance. Il fonctionne tel quel sur GitHub Pages.
 
